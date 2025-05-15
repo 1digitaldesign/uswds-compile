@@ -1,0 +1,21 @@
+{
+  "all": true,
+  "include": [
+    "gulpfile.js"
+  ],
+  "exclude": [
+    "test/**",
+    "node_modules/**"
+  ],
+  "reporter": [
+    "html",
+    "text",
+    "text-summary"
+  ],
+  "check-coverage": false,
+  "per-file": true,
+  "branches": 0,
+  "lines": 0,
+  "functions": 0,
+  "statements": 0
+}
