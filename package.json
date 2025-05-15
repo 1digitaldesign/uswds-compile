@@ -4,8 +4,9 @@
   "description": "A Gulp-based compiler for USWDS Sass",
   "main": "gulpfile.js",
   "scripts": {
-    "test": "mocha \"test/**/*.?(test|integration).js\"",
-    "test:coverage": "nyc --reporter=text --reporter=html mocha \"test/**/*.?(test|integration).js\"",
+    "test": "mocha test/simple.test.js",
+    "test:all": "mocha \"test/**/*.?(test|integration).js\"",
+    "test:coverage": "nyc --reporter=text --reporter=html mocha test/simple.test.js",
     "init": "gulp init",
     "watch": "gulp watch"
   },

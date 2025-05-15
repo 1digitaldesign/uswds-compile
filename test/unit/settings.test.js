@@ -1,9 +1,19 @@
 'use strict';
 
 const { expect } = require('chai');
+const sinon = require('sinon');
 const gulpfile = require('../../gulpfile');
 
 describe('USWDS Compile Settings', () => {
+  let sandbox;
+  
+  beforeEach(() => {
+    sandbox = sinon.createSandbox();
+  });
+  
+  afterEach(() => {
+    sandbox.restore();
+  });
   describe('Version settings', () => {
     it('should have a default version setting', () => {
       expect(gulpfile.settings.version).to.exist;
@@ -87,6 +97,48 @@ describe('USWDS Compile Settings', () => {
       expect(gulpfile.sprite.height).to.exist;
       expect(gulpfile.sprite.separator).to.exist;
       expect(gulpfile.sprite.projectIconsOnly).to.be.a('boolean');
+    });
+  });
+  
+  describe('Internal utility functions', () => {
+    it('should clean paths with double slashes', () => {
+      expect(gulpfile._test.cleanPath('./path//with//double//slashes')).to.equal('./path/with/double/slashes');
+    });
+    
+    it('should get source paths based on settings', () => {
+      const originalVersion = gulpfile.settings.version;
+      try {
+        // Test with version 3
+        gulpfile.settings.version = 3;
+        const v3Path = gulpfile._test.getSrcFrom('uswds');
+        expect(v3Path).to.include('@uswds');
+        
+        // Test with version 2
+        gulpfile.settings.version = 2;
+        const v2Path = gulpfile._test.getSrcFrom('uswds');
+        expect(v2Path).to.include('uswds/dist');
+        
+        // Test with custom path
+        const originalPath = gulpfile.paths.src.uswds;
+        gulpfile.paths.src.uswds = './custom/path';
+        expect(gulpfile._test.getSrcFrom('uswds')).to.equal('./custom/path');
+        gulpfile.paths.src.uswds = originalPath;
+      } finally {
+        // Reset version
+        gulpfile.settings.version = originalVersion;
+      }
+    });
+    
+    it('should handle errors properly', () => {
+      const consoleLogSpy = sandbox.spy(console, 'log');
+      const mockStream = { emit: sandbox.spy() };
+      const mockError = new Error('Test error');
+      mockError.stack = 'Test stack trace';
+      
+      gulpfile._test.handleError.call(mockStream, mockError);
+      
+      expect(consoleLogSpy.calledTwice).to.be.true;
+      expect(mockStream.emit.calledOnceWith('end')).to.be.true;
     });
   });
 });
