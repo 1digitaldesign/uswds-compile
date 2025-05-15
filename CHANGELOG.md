@@ -5,6 +5,8 @@
 ### Updates
 - Updated @uswds/uswds dependency to v3.12.0
 - Added CLAUDE.md to .gitignore
+- Added unit and integration tests
+- Added test dependencies (chai, mocha, sinon)
 
 ### Fixes
 - Removed circular dependency in package.json
