@@ -7,6 +7,7 @@
 - Added CLAUDE.md to .gitignore
 - Added unit and integration tests
 - Added test dependencies (chai, mocha, sinon)
+- Added test coverage with nyc/Istanbul
 
 ### Fixes
 - Removed circular dependency in package.json
