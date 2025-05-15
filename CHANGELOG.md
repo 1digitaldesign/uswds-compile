@@ -11,6 +11,9 @@
 
 ### Fixes
 - Removed circular dependency in package.json
+- Removed duplicated code sections and comments in gulpfile.js
+- Removed unused 'del' package dependency
+- Fixed duplicate PostCSS processing calls
 
 ## 1.2.1
 
