@@ -1,9 +1,11 @@
 .DS_store
 node_modules/
 npm-debug.log*
-test/
 path/
 *.tgz
 assets/
 sass/
 CLAUDE.md
+test/tmp/
+.nyc_output/
+coverage/
