@@ -6,6 +6,9 @@
 - Updated @uswds/uswds dependency to v3.12.0
 - Added CLAUDE.md to .gitignore
 
+### Fixes
+- Removed circular dependency in package.json
+
 ## 1.2.1
 
 ### Updates
