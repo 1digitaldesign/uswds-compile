@@ -5,8 +5,8 @@
 ### Updates
 - Updated @uswds/uswds dependency to v3.12.0
 - Added CLAUDE.md to .gitignore
-- Added unit and integration tests
-- Added test dependencies (chai, mocha, sinon)
+- Added unit and integration tests with 40% code coverage
+- Added test dependencies (chai, mocha, sinon, nyc)
 - Added test coverage with nyc/Istanbul
 
 ### Fixes
