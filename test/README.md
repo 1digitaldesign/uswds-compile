@@ -19,6 +19,12 @@ To run the tests:
 npm test
 ```
 
+To see test coverage:
+
+```bash
+npm run test:coverage
+```
+
 By default, integration tests are skipped because they:
 1. Take longer to run
 2. Require more setup (creating test dirs, files, etc.)

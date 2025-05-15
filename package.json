@@ -4,7 +4,8 @@
   "description": "A Gulp-based compiler for USWDS Sass",
   "main": "gulpfile.js",
   "scripts": {
-    "test": "mocha test/**/*.test.js",
+    "test": "mocha \"test/**/*.?(test|integration).js\"",
+    "test:coverage": "nyc --reporter=text --reporter=html mocha \"test/**/*.?(test|integration).js\"",
     "init": "gulp init",
     "watch": "gulp watch"
   },
@@ -41,6 +42,7 @@
     "@uswds/uswds": "^3.12.0",
     "chai": "^4.5.0",
     "mocha": "^10.8.2",
+    "nyc": "^17.1.0",
     "sinon": "^17.0.1",
     "uswds": "^2.14.0"
   },
