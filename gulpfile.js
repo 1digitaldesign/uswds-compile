@@ -149,7 +149,6 @@ async function getUswdsVersion() {
 /*
 ----------------------------------------
 DIRECTORY MANAGEMENT
-DIRECTORY MANAGEMENT
 ----------------------------------------
 */
 
@@ -197,7 +196,6 @@ function cleanAll(done) {
 /*
 ----------------------------------------
 COPY TASKS
-COPY TASKS
 ----------------------------------------
 */
 
@@ -227,7 +225,6 @@ const copy = {
 
 /*
 ----------------------------------------
-SASS COMPILATION
 SASS COMPILATION
 ----------------------------------------
 */
@@ -265,7 +262,6 @@ function buildSass() {
         quietDeps: !settings.compile.sassDeprecationWarnings,
       }).on('error', sass.logError)
     )
-    .pipe(postcss(buildSettings.postcssPlugins))
     .pipe(postcss(buildSettings.postcssPlugins))
     .pipe(
       dest(paths.dist.css, {
@@ -379,18 +375,26 @@ EXPORTS
 */
 
 // Export settings
-/*
-----------------------------------------
-EXPORTS
-----------------------------------------
-*/
-
-// Export settings
 exports.settings = settings;
 exports.paths = paths;
 exports.sprite = settings.sprite;
 
-// Export individual copy tasks
+// Export internal functions for testing
+exports._test = {
+  cleanPath,
+  getSrcFrom,
+  handleError,
+  logVersion,
+  getUswdsVersion,
+  makeDestFolders,
+  cleanAll,
+  getSpritePaths,
+  buildSass,
+  watchSass,
+  buildSprite,
+  renameSprite,
+  cleanSprite
+};
 
 // Export individual copy tasks
 exports.copyTheme = copy.theme;
@@ -399,12 +403,7 @@ exports.copyImages = copy.images;
 exports.copyJS = copy.js;
 
 // Export grouped copy tasks
-
-// Export grouped copy tasks
 exports.copyAssets = series(copy.fonts, copy.images, copy.js);
-exports.copyAll = series(copy.theme, exports.copyAssets);
-
-// Export compilation tasks
 exports.copyAll = series(copy.theme, exports.copyAssets);
 
 // Export compilation tasks
@@ -420,7 +419,5 @@ exports.compile = series(
 exports.updateUswds = series(exports.copyAssets, exports.compile);
 exports.init = series(logVersion, exports.copyAll, exports.compile);
 exports.watch = series(logVersion, buildSass, watchSass);
-exports.default = exports.watch;
-exports.cleanAll = cleanAll;
 exports.default = exports.watch;
 exports.cleanAll = cleanAll;
